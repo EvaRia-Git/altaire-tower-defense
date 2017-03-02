@@ -27,12 +27,10 @@ public class IsometricObject : MonoBehaviour {
     public IsoPosition  isoPosition;
     private Vector3     realPosition; // Object's transform position in Unity Space
 
-    // Use this for initialization
-    void Start()
+    private void Start()
     {
-        gameObject.GetComponent<Transform>().hideFlags = HideFlags.HideInInspector;
         realPosition = new Vector3();
-        UpdateRealPosition();
+        gameObject.GetComponent<Transform>().hideFlags = HideFlags.HideInInspector;
     }
 
     void OnValidate ()

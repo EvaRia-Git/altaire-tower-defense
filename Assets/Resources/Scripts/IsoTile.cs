@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [ExecuteInEditMode]
+[RequireComponent(typeof(IsometricObject))]
+[RequireComponent(typeof(SpriteRenderer))]
 public class IsoTile : MonoBehaviour
 {
 
@@ -20,14 +22,11 @@ public class IsoTile : MonoBehaviour
     }
 
     public TileType tileType;
-    IsometricObject isoProperties;
-    SpriteRenderer spriteRenderer;
-
-    // Use this for initialization
+    private SpriteRenderer spriteRenderer;
+    
     void Start() {
         tileType = TileType.DEV;
-        isoProperties = gameObject.AddComponent<IsometricObject>();
-        spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         spriteRenderer.hideFlags = HideFlags.HideInInspector;
         UpdateTexture();
     }
