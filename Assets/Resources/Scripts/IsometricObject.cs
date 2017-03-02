@@ -30,6 +30,7 @@ public class IsometricObject : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+        gameObject.GetComponent<Transform>().hideFlags = HideFlags.HideInInspector;
         realPosition = new Vector3();
         UpdateRealPosition();
     }
