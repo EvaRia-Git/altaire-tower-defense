@@ -8,7 +8,8 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public class IsoTile : MonoBehaviour
 {
-
+    // Holds Numeric IDs for each type of tile we create.
+    // New Tiles should be added to this list as we make them.
     public enum TileType
     {
         DEV     = 000,
@@ -16,17 +17,23 @@ public class IsoTile : MonoBehaviour
         WHITE   = 002
     }
 
+    // Loads a Sprite from our Textures folder based on the TileType.
+    // Tile images must be named like "tile-###" and listed in the enum or this will fail.
+    // TODO: We will want to change to a SpriteSheet lookup using source rectangles later for efficiency.
     public static Sprite LoadSprite(TileType id)
     {
         return Resources.Load<Sprite>(string.Format("Textures/Tiles/tile-{0:D3}", (int)id));
     }
 
-    public TileType tileType;
-    private SpriteRenderer spriteRenderer;
+    // Declare Fields
+    public TileType tileType;              // The type of tile out of available tiles.
+    public SpriteRenderer spriteRenderer;  // The SpriteRenderer used to change the tile's sprite.
     
+    // Initialize
     void Start() {
         tileType = TileType.DEV;
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        // We hide the SpriteRenderer in the Inspector since we want to control the Sprite using TileType.
         spriteRenderer.hideFlags = HideFlags.HideInInspector;
         UpdateTexture();
     }
@@ -35,6 +42,7 @@ public class IsoTile : MonoBehaviour
         UpdateTexture();
     }
 
+    // Updates the Tile's Sprite based on the TileType.
     public void UpdateTexture() {
         spriteRenderer.sprite = LoadSprite(tileType);
     }
