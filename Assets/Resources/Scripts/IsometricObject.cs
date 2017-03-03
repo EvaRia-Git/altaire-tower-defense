@@ -23,15 +23,16 @@ public class IsometricObject : MonoBehaviour {
     }
 
     // Declare Fields
-    public IsoScale     isoScale;
-    public IsoPosition  isoPosition;
-    private Vector3     realPosition; // Object's transform position in Unity Space
+    public IsoScale isoScale = new IsoScale();
+    public IsoPosition isoPosition = new IsoPosition();
+    private Vector3 realPosition = new Vector3(); // Object's transform position in Unity Space
+                                      // TODO: Add get/set if we ever need to use this value.
 
-    // Use this for initialization
-    void Start()
+    //Initialize
+    private void Start()
     {
-        realPosition = new Vector3();
-        UpdateRealPosition();
+        // We hide the Transform in the Inspector since we want to control position based on Isometric Properties.
+        gameObject.GetComponent<Transform>().hideFlags = HideFlags.HideInInspector;
     }
 
     void OnValidate ()
