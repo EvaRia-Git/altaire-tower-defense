@@ -26,13 +26,15 @@ public class IsoTile : MonoBehaviour
     }
 
     // Declare Fields
-    public TileType tileType;              // The type of tile out of available tiles.
-    public SpriteRenderer spriteRenderer;  // The SpriteRenderer used to change the tile's sprite.
+    public TileType tileType;             // The type of tile out of available tiles.
+    public float height;                    // Pass ability to control height up one level.
+    private SpriteRenderer spriteRenderer;  // The SpriteRenderer used to change the tile's sprite.
+    public IsometricObject isoProperties;
     
     // Initialize
     void Start() {
-        tileType = TileType.DEV;
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        isoProperties = gameObject.GetComponent<IsometricObject>();
         // We hide the SpriteRenderer in the Inspector since we want to control the Sprite using TileType.
         spriteRenderer.hideFlags = HideFlags.HideInInspector;
         UpdateTexture();
@@ -40,10 +42,21 @@ public class IsoTile : MonoBehaviour
 
     void OnValidate() {
         UpdateTexture();
+        UpdateHeight();
     }
 
     // Updates the Tile's Sprite based on the TileType.
     public void UpdateTexture() {
-        spriteRenderer.sprite = LoadSprite(tileType);
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.sprite = LoadSprite(tileType);
+        }
+    }
+
+    // Updates Height
+    public void UpdateHeight()
+    {
+        isoProperties.isoPosition.isoHeight = height;
+        isoProperties.UpdateRealPosition();
     }
 }
