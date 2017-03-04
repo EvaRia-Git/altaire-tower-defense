@@ -86,7 +86,7 @@ public class IsoGrid : MonoBehaviour {
                     tempGrid[i, j] = new GameObject("Tile-" + i + "-" + j);
                     tempGrid[i, j].transform.SetParent(transform);
                     tempGrid[i, j].AddComponent<IsoTile>();
-                    tempGrid[i, j].GetComponent<IsometricObject>().isoPosition.drawDepth -= i + j;
+                    tempGrid[i, j].GetComponent<IsometricObject>().isoPosition.drawDepth += i + j;
 
                     // Since we are controlling the position of tiles using the grid, 
                     // we hide its manual controls in the inspector.
